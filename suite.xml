@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite" parallel="tests" thread-count="2" >
+    <test name="Real device (HTC)">
+        <parameter name="applicationName" value="HTC" />
+        <parameter name="platform" value="Android" />
+        <classes>
+            <class name="com.pflb.cources.AppiumTest" />
+        </classes>
+    </test>
+    <test name="Emulator (Nexus)">
+        <parameter name="applicationName" value="Emulator" />
+        <parameter name="platform" value="Android" />
+        <classes>
+            <class name="com.pflb.cources.AppiumTest" />
+        </classes>
+    </test>
+</suite>

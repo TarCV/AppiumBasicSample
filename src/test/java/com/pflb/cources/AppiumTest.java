@@ -1,47 +1,34 @@
 package com.pflb.cources;
 
 import com.pflb.cources.screens.CalculatorScreen;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
-import io.appium.java_client.android.AndroidKeyCode;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AppiumTest {
     private AndroidDriver<AndroidElement> driver;
 
-    @BeforeTest
-    public void setUp() throws MalformedURLException {
-        /*
+    @Parameters({"applicationName", "platform"})
+    public AppiumTest(String applicationName, String platform) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability(CapabilityType.APPLICATION_NAME, applicationName);
+        caps.setCapability(MobileCapabilityType.PLATFORM, platform);
+
         caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         caps.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
-        caps.setCapability(MobileCapabilityType.UDID, "emulator-5554");
         caps.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.android.calculator2");
         caps.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, ".Calculator");
-        driver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
-        */
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
-        caps.setCapability(MobileCapabilityType.UDID, "emulator-5554");
-        caps.setCapability(AndroidMobileCapabilityType.BROWSER_NAME, "Chrome");
-        caps.setCapability("chromedriverExecutable", new File("chromedriver").getAbsolutePath());
-        driver = new AndroidDriver<AndroidElement>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
-        driver.get("https://www.desmos.com/fourfunction");
+        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4444/wd/hub"), caps);
     }
 
     @AfterTest
@@ -58,6 +45,28 @@ public class AppiumTest {
                 .digit("2")
                 .evaluate();
         Assert.assertEquals(calculatorScreen.getResult(), "4");
+    }
+
+    @Test
+    public void test1() {
+        CalculatorScreen calculatorScreen = new CalculatorScreen(driver);
+        calculatorScreen
+                .digit("3")
+                .plus()
+                .digit("3")
+                .evaluate();
+        Assert.assertEquals(calculatorScreen.getResult(), "6");
+    }
+
+    @Test
+    public void test2() {
+        CalculatorScreen calculatorScreen = new CalculatorScreen(driver);
+        calculatorScreen
+                .digit("4")
+                .plus()
+                .digit("4")
+                .evaluate();
+        Assert.assertEquals(calculatorScreen.getResult(), "8");
     }
 
     private String switchToWebview() {
