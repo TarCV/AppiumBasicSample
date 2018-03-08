@@ -4,14 +4,14 @@
         <parameter name="applicationName" value="HTC" />
         <parameter name="platform" value="Android" />
         <classes>
-            <class name="com.pflb.cources.AppiumTest" />
+            <class name="com.pflb.cources.CalculatorTest" />
         </classes>
     </test>
     <test name="Emulator (Nexus)">
         <parameter name="applicationName" value="Emulator" />
         <parameter name="platform" value="Android" />
         <classes>
-            <class name="com.pflb.cources.AppiumTest" />
+            <class name="com.pflb.cources.CalculatorTest" />
         </classes>
     </test>
 </suite>

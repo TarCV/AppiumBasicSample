@@ -15,11 +15,11 @@ import org.testng.annotations.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class AppiumTest {
+public class CalculatorTest {
     private AndroidDriver<AndroidElement> driver;
 
     @Parameters({"applicationName", "platform"})
-    public AppiumTest(String applicationName, String platform) throws MalformedURLException {
+    public CalculatorTest(String applicationName, String platform) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(CapabilityType.APPLICATION_NAME, applicationName);
         caps.setCapability(MobileCapabilityType.PLATFORM, platform);
@@ -78,39 +78,4 @@ public class AppiumTest {
         driver.context(webContext);
         return oldContext;
     }
-
-
-    /*
-        private DesiredCapabilities getAwsAppCaps() {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability(MobileCapabilityType.APP,
-                "/Users/const/StudioProjects/aws-device-farm-sample-app-for-android/app/build/outputs/apk/app-debug.apk");
-        caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "device");
-        caps.setCapability(MobileCapabilityType.UDID, "emulator-5554");
-        caps.setCapability("chromedriverExecutable", new File("chromedriver").getAbsolutePath());
-        return caps;
-    }
-
-    @Test
-    public void testAws() {
-        MobileElement menuBtn = driver.findElement(MobileBy.AccessibilityId("ReferenceApp"));
-        menuBtn.click();
-        MobileElement inputControlsItem =
-                driver.findElement(MobileBy.AndroidUIAutomator(
-                        "new UiSelector().text(\"Web\").enabled(true)"));
-        inputControlsItem.click();
-
-        AndroidElement urlBox = driver.findElement(MobileBy.id("website_input"));
-        urlBox.sendKeys("https://www.desmos.com/fourfunction");
-        driver.pressKeyCode(AndroidKeyCode.ENTER);
-
-        String tmp = urlBox.getAttribute("not existing attribute");
-
-        switchToWebview();
-
-        driver.getPageSource();
-    }
-     */
 }
